@@ -1,0 +1,9 @@
+class Core {
+	constructor() {}
+
+	random(array) {
+		return array[Math.floor(Math.random() * array.length)];
+	}
+}
+
+module.exports = Core;
