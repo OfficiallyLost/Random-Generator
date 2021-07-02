@@ -1,7 +1,3 @@
-const Index = require('./lib/index');
+const Index = require('./src/lib/index');
 
-function RandomGenerator() {
-	return new Index();
-}
-
-module.exprts = RandomGenerator;
+module.exports = new Index();
