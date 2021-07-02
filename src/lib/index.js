@@ -5,11 +5,12 @@ const Core = require('./core/Class');
 
 class RandomGenerator {
 	constructor(options) {
+		console.log(this);
 		this.core = new Core();
 		this.names = {
 			first: '',
-			middle: this.core.random(middleNames),
-			last: this.core.random(lastNames)
+			middle: this.core.random.element(middleNames),
+			last: this.core.random.element(lastNames)
 		};
 		this.options = Object.assign(
 			{
@@ -33,13 +34,15 @@ class RandomGenerator {
 
 	/**
 	 * 
-	 * @param {Number} lowest The lowest age
-	 * @param {Number} highest The highest age
-	 * @returns A random age in the given parameters
+	 * @param {?Number} lowest The lowest number
+	 * @param {?Number} highest The highest number
+	 * @returns A random number in the given parameters
 	 */
 
-	age(lowest, highest) {
-		return 'Coming soon';
+	number(lowest, highest) {
+		if (!Number(lowest) || !Number(highest))
+			throw new Error('Both parameters must be of value of Number or you must add a lowest / highest number');
+		return Math.floor(Math.random() * highest + lowest);
 	}
 
 	get name() {
@@ -53,7 +56,7 @@ class RandomGenerator {
 		const randomLast = this.names.last;
 
 		if (this.options.gender === 'male') {
-			randomFirst = this.core.random(firstNames.male);
+			randomFirst = this.core.random.element(firstNames.male);
 			if (this.options.first && this.options.middle && this.options.last)
 				return `${randomFirst} ${randomMiddle} ${randomLast}`;
 			if (this.options.first && !this.options.middle && this.options.last) return `${randomFirst} ${randomLast}`;
@@ -61,7 +64,7 @@ class RandomGenerator {
 				return `${randomFirst} ${randomMiddle}`;
 			if (this.options.first && !this.options.middle && !this.options.last) return randomFirst;
 		} else if (this.options.gender === 'female') {
-			randomFirst = this.core.random(firstNames.female);
+			randomFirst = this.core.random.element(firstNames.female);
 			if (this.options.first && this.options.middle && this.options.last)
 				return `${randomFirst} ${randomMiddle} ${randomLast}`;
 			if (this.options.first && !this.options.middle && this.options.last) return `${randomFirst} ${randomLast}`;
