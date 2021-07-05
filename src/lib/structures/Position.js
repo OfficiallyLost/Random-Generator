@@ -1,12 +1,12 @@
-const RandomGenerator = require('../../../index');
+const Core = require('../core/Class');
 
-class Position {
+class Position extends Core {
 	constructor() {
-		this.random = RandomGenerator();
+		super();
 	}
 
 	get data() {
-		return this.random;
+		return '';
 	}
 }
 
