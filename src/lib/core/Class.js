@@ -1,12 +1,11 @@
-const Random = require('../structures/Random');
-console.log(new Random());
-
 class Core {
 	constructor() {}
 
 	get random() {
 		return {
-			element: Random.element
+			element(array) {
+				return array[Math.floor(Math.random() * array.length)];
+			}
 		};
 	}
 }
